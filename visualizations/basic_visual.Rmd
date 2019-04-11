@@ -1,0 +1,33 @@
+---
+title: "basic_visualizations"
+author: "Nazariy Perepichka"
+date: "April 11, 2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+speeches <- read.csv(file="../data/speeches_en.csv", header = TRUE)
+```
+
+
+```{r}
+library(quanteda)
+library(wordcloud)
+```
+
+```{r}
+speech_corpus <- corpus(as.character(speeches$speech_text))
+dfm <- dfm(speech_corpus, remove=stopwords("english"), remove_punct = TRUE)
+```
+
+
+```{r}
+textplot_wordcloud(dfm, max_words=300)
+```
